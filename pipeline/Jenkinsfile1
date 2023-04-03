@@ -14,7 +14,7 @@ pipeline {
         stage('Add changes to GitLab') {
             steps {
                 sh 'ssh-keyscan -H 172.31.1.132 >> ~/.ssh/known_hosts'                
-                sh 'ssh -i /home/ubuntu/keypair_test.pem ubuntu@172.31.1.132 -tt "cd ~/test_task; sudo docker login registry.gitlab.com; sudo docker build -t registry.gitlab.com/yerbolzhakiyev/test_task:'${env.BUILD_NUMBER}' .; sudo docker push registry.gitlab.com/yerbolzhakiyev/test_task:'${env.BUILD_NUMBER}'"'
+                sh "ssh -i /home/ubuntu/keypair_test.pem ubuntu@172.31.1.132 -tt 'cd ~/test_task; sudo docker login registry.gitlab.com; sudo docker build -t registry.gitlab.com/yerbolzhakiyev/test_task:${env.BUILD_NUMBER} .; sudo docker push registry.gitlab.com/yerbolzhakiyev/test_task:${env.BUILD_NUMBER}'"
             }
         }        
     }
