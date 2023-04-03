@@ -24,6 +24,7 @@ pipeline {
                 script {
                 sh 'ssh-keyscan -H 172.31.3.14 >> ~/.ssh/known_hosts'
                 sh "ssh -i /home/ubuntu/keypair_test.pem ubuntu@172.31.3.14 -tt 'cd /home/ubuntu; sudo docker pull registry.gitlab.com/yerbolzhakiyev/test_task:${last_build_number}; sudo docker run -p 8080:80 --name my-website registry.gitlab.com/yerbolzhakiyev/test_task; sudo systemctl restart nginx'" 
+                    }
                 }
             }
         }
