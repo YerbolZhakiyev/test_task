@@ -1,5 +1,5 @@
 pipeline {
-    agent any
+    agent 1
 
     stages {
         stage('Git pull changes') {
