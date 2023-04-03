@@ -24,6 +24,7 @@ pipeline {
     success {
       script {
         writeFile file: 'last_build_number.txt', text: env.BUILD_NUMBER
+        sh "cp last_build_number.txt /home/ubuntu/"
       }
     }
   }
