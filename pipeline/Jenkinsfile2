@@ -2,9 +2,8 @@ pipeline {
     agent any
     stages {
         stage('Define version') {
-            agent any
             steps {
-                sh 'sudo cp /tmp/last_build_number.txt .'
+                sh 'cp /tmp/last_build_number.txt .'
                 script {
                     def last_build_number = readFile 'last_build_number.txt'
                 }
