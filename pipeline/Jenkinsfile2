@@ -4,8 +4,9 @@ pipeline {
         stage('Define version') {
             steps {
                 sh 'cp /tmp/last_build_number.txt .'
+                def last_build_number
                 script {
-                    def last_build_number = readFile 'last_build_number.txt'
+                    last_build_number = readFile 'last_build_number.txt'
                 }
             }
         }
