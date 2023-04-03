@@ -3,14 +3,11 @@ pipeline {
     stages {
         stage('Define version') {
             steps {
-                sh 'cp /tmp/last_build_number.txt .'
-                def last_build_number
                 script {
-                    last_build_number = readFile 'last_build_number.txt'
+                    def last_build_number = readFile 'tmp/last_build_number.txt'
                 }
             }
         }
-        
         stage('Make changes on site') {
             agent {
                 label '2'

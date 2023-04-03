@@ -27,8 +27,7 @@ pipeline {
   post {
     success {
       script {
-        writeFile file: 'last_build_number.txt', text: env.BUILD_NUMBER
-        sh "cp last_build_number.txt /tmp/"
+        sh "echo '${env.BUILD_NUMBER}' > /tmp/last_build_number.txt"
       }
     }
   }
