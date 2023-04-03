@@ -7,23 +7,19 @@ pipeline {
             steps {
                 sh 'sudo cp /home/ubuntu/workspace/pipeline1/last_build_number.txt .'
                 script {
-                def last_build_number = readFile 'last_build_number.txt'
+                    def last_build_number = readFile 'last_build_number.txt'
                 }
             }
         }
-    }
-
-
-    agent {
-        label '2'
-    }
-
-    stages {
+        
         stage('Make changes on site') {
+            agent {
+                label '2'
+            }
             steps {
                 script {
-                sh 'ssh-keyscan -H 172.31.3.14 >> ~/.ssh/known_hosts'
-                sh "ssh -i /home/ubuntu/keypair_test.pem ubuntu@172.31.3.14 -tt 'cd /home/ubuntu; sudo docker pull registry.gitlab.com/yerbolzhakiyev/test_task:${last_build_number}; sudo docker run -p 8080:80 --name my-website registry.gitlab.com/yerbolzhakiyev/test_task; sudo systemctl restart nginx'" 
+                    sh 'ssh-keyscan -H 172.31.3.14 >> ~/.ssh/known_hosts'
+                    sh "ssh -i /home/ubuntu/keypair_test.pem ubuntu@172.31.3.14 -tt 'cd /home/ubuntu; sudo docker pull registry.gitlab.com/yerbolzhakiyev/test_task:${last_build_number}; sudo docker run -p 8080:80 --name my-website registry.gitlab.com/yerbolzhakiyev/test_task; sudo systemctl restart nginx'" 
                 }
             }
         }
