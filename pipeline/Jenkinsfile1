@@ -4,13 +4,13 @@ pipeline {
     stages {
         stage('Git pull changes') {
             steps {
-                sh 'ssh -i /home/ubuntu/keypair_test.pem ubuntu@172.31.1.132 -tt "cd ~/test_task; sudo git pull origin"'
+                sh 'sudo ssh -i /home/ubuntu/keypair_test.pem ubuntu@172.31.1.132 -tt "cd ~/test_task; sudo git pull origin"'
             }
         }
 
         stage('Add changes to GitLab') {
             steps {
-                sh 'ssh -i /home/ubuntu/keypair_test.pem ubuntu@172.31.1.132 -tt "cd ~/test_task; sudo docker login registry.gitlab.com; sudo docker build -t registry.gitlab.com/yerbolzhakiyev/test_task:${env.BUILD_NUMBER} .; sudo docker push registry.gitlab.com/yerbolzhakiyev/test_task:${env.BUILD_NUMBER}"'
+                sh 'sudo ssh -i /home/ubuntu/keypair_test.pem ubuntu@172.31.1.132 -tt "cd ~/test_task; sudo docker login registry.gitlab.com; sudo docker build -t registry.gitlab.com/yerbolzhakiyev/test_task:${env.BUILD_NUMBER} .; sudo docker push registry.gitlab.com/yerbolzhakiyev/test_task:${env.BUILD_NUMBER}"'
             }
         }        
     }
