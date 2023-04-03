@@ -19,7 +19,7 @@ pipeline {
                     sh "sudo docker stop my-website"
                     sh "sudo docker rm my-website"
                     sh "sudo docker pull registry.gitlab.com/yerbolzhakiyev/test_task:${env.LAST_BUILD_NUMBER}"
-                    sh "sudo docker run -p 8080:80 --name my-website registry.gitlab.com/yerbolzhakiyev/test_task:${env.LAST_BUILD_NUMBER}"
+                    sh "sudo docker run -d -p 8080:80 --name my-website registry.gitlab.com/yerbolzhakiyev/test_task:${env.LAST_BUILD_NUMBER}"
                     sh "sudo systemctl restart nginx"
                 }
             }
